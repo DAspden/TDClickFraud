@@ -1,6 +1,7 @@
 #more PlaceHoldermd
 import os
 import pandas as pd
+import matplotlib
 
 class Dataloader(object):
 	"""docstring for Dataloader"""
@@ -13,20 +14,7 @@ class Dataloader(object):
 		if not test_data_file_name.endswith('.csv'): test_data_file_name += '.csv'
 		self.test_data = os.path.join(app_path,'data',test_data_file_name)
 
-	
-	def load_data(self,nrows):
-		self.df = pd.read_csv(self.train_data, nrows=nrows)
 
-	def get_data_summary(self):
-		print('Summary of Data')
-
-
-	def test(self):
-		print(self.train_data)
-		print(self.test_data)
-		self.load_data(10)
-		print(self.df.head(20))
-		print(self)
 
 	def __repr__(self):
 			s = '''Data fields\nEach row of the training data contains a click record, with the following features.
@@ -39,12 +27,37 @@ The test data is similar, with the following differences:\nclick_id: reference f
 is_attributed: not included'''
 			return s
 
+	# nrows is an optional argument, it is initially none, which would have read_csv operate as if no argument was passed
+	def load_data(self,nrows=None):
+		self.df = pd.read_csv(self.train_data, nrows=nrows)
+
+	def get_data_summary(self):
+		s = 'Summary of Data\n\n'
+		s += 'Index: \n' + str(self.df.index) + '\n\n'
+		s += 'Columns: \n' + str(self.df.columns) + '\n\n'
+		s += 'Description: \n' + str(self.df.describe())
+
+		self.df['app']
+		return s
+
+	def test2(self):
+		self.load_data()
+		print(self.get_data_summary())
+		print(self.df.hist())
+	def test1(self):
+		print(self.train_data)
+		print(self.test_data)
+		self.load_data(10)
+		print(self.df.head(20))
+		print(self)
+
+
 if __name__ == '__main__': 
-	print('Hello, welcome to the Dataloader for this project. This program requires that the test and training data be in unzipped csv format.')
+	print('Hello, welcome to the Dataloader for this project. This program requires that the test and training data be in unzipped csv format.\n\n')
 	test_csv_name = 'test_test.csv'
 	train_csv_name ='train_sample.csv'
 	my_dataloader = Dataloader(train_csv_name , test_csv_name)
-	my_dataloader.test()
+	my_dataloader.test2()
 
 	# wu's shoes
 	# zoo for shoes
