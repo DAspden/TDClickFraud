@@ -7,17 +7,16 @@ import seaborn as sns
 
 class Dataloader():
 	"""docstring for Dataloader"""
-	def __init__(self, train_data_file_name, test_data_file_name, nrows=None):
+	def __init__(self, train_data_file_name, test_data_file_name, nrows=None, local=False):
 		# create path
 		path = 1
-		if path == 0:
-			pass
-			# app_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-			# # print(app_path)
-			# if not train_data_file_name.endswith('.csv'): train_data_file_name += '.csv'
-			# self.train_data = os.path.join(app_path,'data',train_data_file_name)
-			# if not test_data_file_name.endswith('.csv'): test_data_file_name += '.csv'
-			# self.test_data = os.path.join(app_path,'data',test_data_file_name)
+		if local:
+			app_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+			print(app_path)
+			if not train_data_file_name.endswith('.csv'): train_data_file_name += '.csv'
+			self.train_data = os.path.join(app_path,'data',train_data_file_name)
+			if not test_data_file_name.endswith('.csv'): test_data_file_name += '.csv'
+			self.test_data = os.path.join(app_path,'data',test_data_file_name)
 		else:
 			self.train_data = train_data_file_name
 			self.test_data = test_data_file_name
@@ -95,8 +94,8 @@ if __name__ == '__main__':
 	print('Hello, welcome to the Dataloader for this project. This program requires that the test and training data be in unzipped csv format.\n\n')
 	test_csv_name = 'test_test.csv'
 	train_csv_name ='train_sample.csv'
-	my_dataloader = Dataloader(train_csv_name , test_csv_name)
-	my_dataloader.test2()
+	my_dataloader = Dataloader(train_csv_name , test_csv_name, local=True)
+	my_dataloader.test1()
 
 	# wu's shoes
 	# zoo for shoes
