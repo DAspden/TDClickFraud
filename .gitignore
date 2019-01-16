@@ -1,4 +1,4 @@
 # ignore the data folder
-data/
+ClickFraudApp\data\
 # ignore all csv files
 *.csv
