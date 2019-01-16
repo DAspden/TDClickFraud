@@ -1,0 +1,13 @@
+Stages of Click Fraud problem
+Load environment
+	requirements
+	SET KAGGLE_USERNAME=dinosaur-binoculars
+	SET KAGGLE_KEY = xxxxxxxxxxxxxxxxx
+	
+Load Data
+	pip install kaggle	
+	kaggle competitions download -c talkingdata-adtracking-fraud-detection
+Manipulate Data
+Train Classifier
+test classifer
+generate ROC diagram
