@@ -2,7 +2,8 @@
 import os
 import pandas as pd
 import matplotlib
-import seaboarn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class Dataloader():
 	"""docstring for Dataloader"""
@@ -49,15 +50,37 @@ is_attributed: not included'''
 		self.df.hist()
 		s += 'dan test! histograms should be above, but they wont be!\n\n' 
 		s += 'box plot time'
-		sns.boxplot(x=df['os'])
-		sns.boxplot(x=df['channel'])
+		sns.boxplot(x=self.df['os'])
+		sns.boxplot(x=self.df['channel'])
 		df[df['os']<400].hist(column='os',bins=100)
-		self.df.boxplot()
+		df1 = df[df['os'].isin([13,19])]
+		#self.df.boxplot()
+
+		print('Information about the category os\n\n')
+		print('Let\'s look at all of the different operating systems in the os column using df[\'os\'].value_counts() ')
+		self.df.value_counts()
+		print('\n\nGreat, now let\'s look at the distribution of those counts ')
+		sns.boxplot(x=self.df['os'].value_counts())
+		print('\n\nWe see that there are two massive outliers. These must be the most popular operating systems.')
 		return s
+
+	def get_data_spread_counts(self):
+		df = self.df
+		print('The dataframe has the following columns\n\n')
+		print(df.columns)
+		print('\n\n'+'Here are the plots for each feature')
+		for i, col in enumerate(df.columns):
+			#print('Summary stats for ',col)
+			plt.figure(i*2)
+			sns.boxplot(x=df[col].value_counts()).set_title('spread of '+ str(col))
+			plt.figure(i*2+1)
+			sns.countplot(x=df[col].value_counts()).set_title('counts of ' + str(col))
+		return 1
 
 	def test2(self):
 		self.load_data()
-		print(self.get_data_summary())
+		print(get_data_spread_counts())
+        #print(self.get_data_summary())
 		#print(self.df.hist())
        
 	def test1(self):
